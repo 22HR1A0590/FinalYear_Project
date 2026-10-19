@@ -1,0 +1,60 @@
+{% extends "index.html" %}
+
+{% block nav %}
+{{ block.super }}
+{% endblock %}
+
+{% block hero %}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<section class="section" style="padding-top: 100px; padding-bottom: 150px; background: linear-gradient(to right, #1f4037, #99f2c8); min-height: 100vh; font-family: 'Poppins', sans-serif;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="card shadow-lg p-5 border-0" style="background: rgba(255, 255, 255, 0.95); border-radius: 16px;">
+          <h3 class="text-center mb-4" style="color: #1f4037; font-weight: 600;">🔐 Server Login</h3>
+
+          <form method="POST" action="{% url 'server_login' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="email" class="form-label" style="font-weight: 500;">Email</label>
+              <input type="text" class="form-control" name="email" id="email" required
+                style="padding: 12px; border-radius: 8px; border: 1px solid #ccc; transition: all 0.3s;">
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label" style="font-weight: 500;">Password</label>
+              <input type="password" class="form-control" name="password" id="password" required
+                style="padding: 12px; border-radius: 8px; border: 1px solid #ccc; transition: all 0.3s;">
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn"
+                style="background-color: #1f4037; color: white; padding: 12px; font-weight: 600; border-radius: 8px; transition: background-color 0.3s;">
+                Login
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    input:focus {
+      border-color: #1f4037;
+      box-shadow: 0 0 5px rgba(31, 64, 55, 0.3);
+      outline: none;
+    }
+
+    .btn:hover {
+      background-color: #163329;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      transition: transform 0.3s ease;
+    }
+  </style>
+</section>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'index.html' %}
+
+{% block nav %}
+<header id="header" class="header sticky-top">
+  <div class="branding d-flex align-items-center">
+    <div class="container position-relative d-flex align-items-center justify-content-between">
+      <a href="{% url 'data_owner_dashboard' %}" class="logo d-flex align-items-center text-decoration-none">
+        <h1 class="sitename text-black">Privacy-Preserving Keyword Search</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="{% url 'data_owner_dashboard' %}">Home</a></li>
+          <li><a href="{% url 'view_profile' %}">View Profile</a></li>
+          <li><a href="{% url 'upload' %}">Upload File</a></li>
+          <li><a href="{% url 'view_file' %}">View Files</a></li>
+          <li><a href="{% url 'view_request' %}">View Request</a></li>
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+{% block hero %}
+<style>
+  .dashboard-bg {
+    background: linear-gradient(to right, #00c9a7, #5c5feb); /* 🍃 Aqua-Teal to Soft Green */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dashboard-card {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 50px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    color: white;
+    text-align: center;
+    max-width: 700px;
+    width: 90%;
+    animation: slideIn 1.2s ease-in-out;
+  }
+
+  .dashboard-card h2 {
+    font-size: 2.6rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #ffffff;
+  }
+
+  .dashboard-card p {
+    font-size: 1.15rem;
+    opacity: 0.95;
+    color: #f1f1f1;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+<section class="dashboard-bg">
+  <div class="dashboard-card">
+    <h2>Welcome, Data Owner 👋</h2>
+    <p>Manage your encrypted files, handle user requests, and maintain control — all in one secure space.</p>
+  </div>
+</section>
+{% endblock %}
+{% endblock %}

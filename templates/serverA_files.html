@@ -1,0 +1,77 @@
+{% extends "index.html" %}
+
+{% block nav %}
+<header id="header" class="header sticky-top">
+  <div class="branding d-flex align-items-center">
+    <div class="container position-relative d-flex align-items-center justify-content-between">
+      <a href="{% url 'dashboard' %}" class="logo d-flex align-items-center">
+        <h1 class="sitename">Privacy-Preserving Keyword Search</h1>
+      </a>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+            <li><a href="{% url 'serverA_dashboard' %}">Home</a></li>
+            <li><a href="{% url 'serverA_files' %}">View Files</a></li>
+            <!-- <li><a href="{% url 'view_request' %}">View Request</a></li> -->
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+          </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+{% block hero %}
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<section class="section" style="padding-top: 100px; padding-bottom: 150px; background: linear-gradient(to right, #0f2027, #203a43, #2c5364); min-height: 100vh; font-family: 'Poppins', sans-serif;">
+  <div class="container">
+    {% if files %}
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div style="background: #fff; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); overflow: hidden;">
+          <h3 class="text-center p-3" style="background-color: #4e54c8; color: white;">📂 View Files</h3>
+          <div class="table-responsive">
+            <table class="table table-striped mb-0">
+              <thead class="table-dark">
+                <tr>
+                  <th scope="col">Sl No.</th>
+                  <!-- <th scope="col">Filename</th> -->
+                  <th scope="col">File Data</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for file in files %}
+                <tr>
+                  <td>{{ forloop.counter }}</td>
+                  <td style="word-break: break-word;">{{ file.doc.filename }}</td>
+                  <td>{{ file.file_part|truncatechars:150 }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination -->
+          <div class="d-flex justify-content-center align-items-center p-3">
+            {% if files.has_previous %}
+              <a href="?page={{ files.previous_page_number }}" class="btn btn-outline-primary mx-2">⟵ Previous</a>
+            {% endif %}
+            <span>Page {{ files.number }} of {{ files.paginator.num_pages }}</span>
+            {% if files.has_next %}
+              <a href="?page={{ files.next_page_number }}" class="btn btn-outline-primary mx-2">Next ⟶</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="text-center text-white">
+      <h3>No files found.</h3>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+{% endblock %}

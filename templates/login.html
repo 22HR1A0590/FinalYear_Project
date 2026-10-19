@@ -1,0 +1,117 @@
+{% extends "index.html" %}
+
+{% block nav %}
+{{ block.super }}
+{% endblock %}
+
+{% block hero %}
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .custom-bg {
+    background-color: #f0f2f5; /* soft light background */
+    min-height: 100vh;
+    background-image: url('https://www.transparenttextures.com/patterns/diamond-upholstery.png');
+    background-size: cover;
+    background-repeat: repeat;
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    transition: all 0.3s ease;
+  }
+
+  .glass-card:hover {
+    transform: scale(1.02);
+  }
+
+  .form-control {
+    border-radius: 12px;
+    border: 1px solid #ccc;
+  }
+
+  .form-control:focus {
+    border-color: #ff6f61;
+    box-shadow: 0 0 0 0.2rem rgba(255, 111, 97, 0.25);
+  }
+
+  .login-btn {
+    background-color: #ff6f61;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 12px;
+    padding: 10px 0;
+    transition: background-color 0.3s ease;
+  }
+
+  .login-btn:hover {
+    background-color: #e85c50;
+  }
+
+  .form-title {
+    color: #333;
+    font-weight: 700;
+  }
+
+  .text-muted a {
+    color: #ff6f61;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .text-muted a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<section class="custom-bg d-flex align-items-center justify-content-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="glass-card">
+          <h2 class="text-center form-title mb-4">🔐 Sign In to Your Account</h2>
+
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }} text-center">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+
+          <form method="POST" action="">
+            {% csrf_token %}
+            <div class="form-floating mb-4">
+              <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+              <label for="email">Email Address</label>
+            </div>
+
+            <div class="form-floating mb-4">
+              <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+              <label for="password">Password</label>
+            </div>
+
+            <div class="d-grid mb-3">
+              <button type="submit" class="btn login-btn">Log In</button>
+            </div>
+          </form>
+
+          <div class="text-center text-muted mt-3">
+            <small>
+              Don't have an account?
+              <a href="{% url 'registration' %}">Register here</a>
+            </small>
+            <div>
+            <a href="{% url 'forgot_password' %}">Forgot Password</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

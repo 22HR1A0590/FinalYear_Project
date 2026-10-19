@@ -1,0 +1,39 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block hero %}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<section id="about" class="about section" style="background: linear-gradient(to right, #eef2f3, #8e9eab); font-family: 'Poppins', sans-serif; padding: 80px 0;">
+
+  <!-- Section Title -->
+  <div class="container text-center mb-5" data-aos="fade-up">
+    <h2 style="font-weight: 600; color: #333;">About</h2>
+    <p><span style="color: #4e54c8; font-weight: 500;">Find Out More</span> <span class="description-title" style="font-weight: 600;">About Us</span></p>
+  </div>
+
+  <div class="container">
+    <div class="row align-items-center gy-4">
+
+      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+        <img src="{% static 'assets/img/research.webp' %}" alt="Data Security" class="img-fluid rounded shadow">
+      </div>
+
+      <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+        <div class="about-content ps-0 ps-lg-4">
+          <h3 style="color: #4e54c8; font-weight: 600;">Privacy-Preserving Keyword Search With Access Control for Secret Sharing-Based Data Outsourcing</h3>
+          <p class="fst-italic text-dark mt-3" style="font-size: 16px; line-height: 1.7;">
+            In today’s data-driven digital environment, ensuring the privacy and security of outsourced data is a critical challenge, especially in cloud-based services. This system enables secure data retrieval without exposing sensitive information to untrusted servers using a (k, n) threshold secret sharing scheme.
+          </p>
+          <p class="text-dark" style="font-size: 15px; line-height: 1.8;">
+            It uses a model with Data Owners, Data Users, and distributed computing servers. Data is split into shares to ensure that no partial data is ever exposed unless a minimum number of shares is combined. Users search using encrypted keywords, and servers respond without learning the queries. The framework also integrates access control using keyword and password combinations.
+          </p>
+          <p class="text-dark" style="font-size: 15px; line-height: 1.8;">
+            This efficient, scalable approach improves security while reducing overhead. Even with semi-honest servers, data confidentiality is maintained. It also prevents unauthorized searches and guards against keyword-guessing attacks.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

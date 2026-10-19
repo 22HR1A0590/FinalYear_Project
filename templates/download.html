@@ -1,0 +1,67 @@
+{% extends "index.html" %}
+
+{% block nav %}
+<header id="header" class="header sticky-top">
+  <div class="branding d-flex align-items-center">
+    <div class="container position-relative d-flex align-items-center justify-content-between">
+      <a href="{% url 'dashboard' %}" class="logo d-flex align-items-center">
+        <h1 class="sitename">Privacy-Preserving Keyword Search</h1>
+      </a>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="{% url 'data_user_dashboard' %}">Home</a></li>
+          <li><a href="{% url 'search' %}" class="active">Search File</a></li>
+          <li><a href="{% url 'view_requestfile' %}">View Files</a></li>
+          <li><a href="{% url 'view_response' %}">View Response</a></li>
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+{% block hero %}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<section class="section" style="padding-top: 100px; padding-bottom: 150px; background: linear-gradient(135deg, #667eea, #764ba2); min-height: 100vh; font-family: 'Poppins', sans-serif;">
+
+  <div class="container">
+    <div style="max-width: 600px; margin: 0 auto; background: #ffffff; padding: 40px 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); transition: transform 0.3s ease;">
+      <form method="post">
+        {% csrf_token %}
+        <h2 style="text-align:center; color: #5f4dee; font-weight: 600;">🔍 Download Encrypted Files</h2>
+
+        <input type="text" name="keyword" placeholder="Enter keyword" required
+          style="width: 100%; padding: 12px 15px; margin-top: 25px; border: 1px solid #ccc; border-radius: 6px; font-size: 15px; transition: border 0.3s ease;">
+        
+        <input type="text" name="key" placeholder="Enter key" required
+          style="width: 100%; padding: 12px 15px; margin-top: 20px; border: 1px solid #ccc; border-radius: 6px; font-size: 15px; transition: border 0.3s ease;">
+        
+        <button type="submit"
+          style="width: 100%; background-color: #5f4dee; color: white; border: none; padding: 12px; border-radius: 6px; margin-top: 25px; font-weight: 600; font-size: 16px; transition: background-color 0.3s ease;">
+          ⬇️ Download
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <style>
+    input:focus {
+      outline: none;
+      border-color: #5f4dee;
+      box-shadow: 0 0 5px rgba(95, 77, 238, 0.3);
+    }
+
+    button:hover {
+      background-color: #4c3dd0;
+    }
+
+    .container > div:hover {
+      transform: translateY(-5px);
+    }
+  </style>
+</section>
+{% endblock %}
+{% endblock %}

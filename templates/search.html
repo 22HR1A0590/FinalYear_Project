@@ -1,0 +1,176 @@
+{% extends "index.html" %}
+
+{% block nav %}
+<header id="header" class="header sticky-top">
+  <div class="branding d-flex align-items-center">
+    <div class="container position-relative d-flex align-items-center justify-content-between">
+      <a href="{% url 'dashboard' %}" class="logo d-flex align-items-center">
+        <h1 class="sitename">Privacy-Preserving Keyword Search</h1>
+      </a>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="{% url 'data_user_dashboard' %}">Home</a></li>
+          <li><a href="{% url 'view_profile' %}">View Profile</a></li>
+          <li><a href="{% url 'search' %}" class="active">Search File</a></li>
+          <li><a href="{% url 'view_requestfile' %}">View Files</a></li>
+          <li><a href="{% url 'view_response' %}">View Response</a></li>
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+    </div>
+  </div>
+</header>
+
+
+{% block hero %}
+<style>
+  .search-bg {
+    background: linear-gradient(to right, #00c9ff, #e2b44f);
+    min-height: 100vh;
+    padding-top: 100px;
+    padding-bottom: 150px;
+  }
+
+  .glass-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .glass-form:hover {
+    transform: scale(1.01);
+  }
+
+  .glass-form input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+
+  .glass-form button {
+    width: 100%;
+    background-color: #00c9ff;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    margin-top: 20px;
+    font-weight: 600;
+    transition: background 0.3s ease;
+  }
+
+  .glass-form button:hover {
+    background-color: #00a3cc;
+  }
+
+  .results-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 40px;
+  }
+
+  .results-table thead {
+    background-color: #00c9ff;
+    color: white;
+  }
+
+  .results-table th,
+  .results-table td {
+    padding: 14px;
+    font-size: 15px;
+  }
+
+  .results-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  .results-table tbody tr:hover {
+    background-color: #e3faff;
+  }
+
+  .results-table button {
+    background-color: #00c9ff;
+    border: none;
+    padding: 6px 12px;
+    color: white;
+    font-size: 14px;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+  }
+
+  .results-table button:hover {
+    background-color: #00a3cc;
+  }
+
+  .section-title {
+    color: white;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+</style>
+
+<section class="search-bg">
+  <div class="container">
+
+    <div class="glass-form">
+      <form method="post">
+        {% csrf_token %}
+        <h2 class="text-center" style="color: #00a3cc;">🔍 Search Files</h2>
+        <input type="text" name="keyword" placeholder="Enter keyword" required>
+        <button type="submit">Search</button>
+      </form>
+    </div>
+     {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+    
+    {% if results %}
+    <h3 class="section-title">🔎 Search Results</h3>
+    <div class="table-responsive">
+      <table class="results-table">
+        <thead>
+          <tr>
+            <th>Filename</th>
+            <th>Encrypted Content</th>
+            <th>Owner</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for result in results %}
+          <tr>
+            <td>{{ result.filename }}</td>
+            <td style="max-width: 250px; overflow-wrap: break-word;">{{ result.filedata|truncatechars:50 }}</td>
+            <td>{{ result.owner.username }}</td>
+            <td>
+              <form method="post" action="{% url 'request_file' result.id %}">
+                {% csrf_token %}
+                <button type="submit">Request</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
+{% endblock %}

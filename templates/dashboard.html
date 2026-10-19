@@ -1,0 +1,52 @@
+{% extends "index.html" %}
+
+{% block nav %}
+{{ block.super }}
+{% endblock %}
+
+{% block hero %}
+<section class="section" style="padding-top: 100px; padding-bottom: 150px; background: linear-gradient(to right, #4e54c8, #8f94fb); min-height: 100vh;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="card shadow-sm p-4">
+          <h2 class="text-center mb-4">Dashboard</h2>
+          
+         
+
+          <div class="row g-4 mt-4">
+
+            <div class="col-md-4">
+              <div class="card h-100 text-center p-3">
+                <i class="bi bi-upload" style="font-size: 2rem;"></i>
+                <h5 class="mt-2">Upload Documents</h5>
+                <p>Securely upload and share keyword-protected documents.</p>
+                <a href="{% url 'upload' %}" class="btn btn-outline-primary btn-sm">Go</a>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card h-100 text-center p-3">
+                <i class="bi bi-search" style="font-size: 2rem;"></i>
+                <h5 class="mt-2">Search by Keyword</h5>
+                <p>Search encrypted keywords across multiple servers.</p>
+                <a href="#" class="btn btn-outline-primary btn-sm">Go</a>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card h-100 text-center p-3">
+                <i class="bi bi-lock" style="font-size: 2rem;"></i>
+                <h5 class="mt-2">Access Control</h5>
+                <p>Enforce secure access using password-based sharing.</p>
+                <a href="#" class="btn btn-outline-primary btn-sm">Go</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
